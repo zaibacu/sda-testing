@@ -1,15 +1,34 @@
 package examples.shop;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Terminal {
-    private Scanner sc = new Scanner(System.in);
+    private Scanner sc;
     private final Client client;
 
+    public Terminal(Client client, InputStream inputStream){
+        sc = new Scanner(inputStream);
+        this.client = client;
+    }
+
+    public Terminal(String url, InputStream inputStream){
+        sc = new Scanner(inputStream);
+        this.client = new Client(url);
+    }
+
+    public Terminal(String url, File inputFile) throws IOException{
+        sc = new Scanner(inputFile);
+        this.client = new Client(url);
+    }
+
     public Terminal(String url){
+        sc = new Scanner(System.in);
         this.client = new Client(url);
     }
 
